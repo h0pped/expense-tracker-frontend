@@ -1,4 +1,3 @@
-import * as React from "react";
 import "./Button.scss";
 
 export interface ButtonProps {
