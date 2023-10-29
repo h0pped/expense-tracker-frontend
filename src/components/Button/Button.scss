@@ -1,0 +1,42 @@
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  &:hover {
+    border-color: #646cff;
+  }
+  &:focus,
+  &:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+
+  &.disabled {
+    background-color: #1a1a1a;
+    color: rgba(123, 123, 123, 0.87);
+    &:hover {
+      border-color: transparent;
+    }
+    cursor: default;
+  }
+
+  &.width {
+    &-full {
+      width: 100%;
+    }
+    &-75 {
+      width: 75%;
+    }
+    &-50 {
+      width: 50%;
+    }
+    &-25 {
+      width: 25%;
+    }
+  }
+}
