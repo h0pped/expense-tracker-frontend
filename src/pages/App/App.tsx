@@ -1,32 +1,31 @@
-import Button from "../../components/Button/Button";
-import { auth } from "../../utils/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import "./App.scss";
-import { googleLogin, signOut } from "./utils";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Landing from "../Landing/Landing";
+import Layout from "../Layout/Layout";
+import ErrorPage from "../Error/Error";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <Landing />,
+        errorElement: <ErrorPage />,
+      },
+    ],
+  },
+]);
+
+const queryClient: QueryClient = new QueryClient();
 
 function App() {
-  const [user, loading] = useAuthState(auth);
-
   return (
     <>
-      <div className="landing">
-        <h1 className="title-text">Get control over your expenses</h1>
-        {!user && !loading && (
-          <div className="sign-in-options">
-            <Button width="75" onClick={googleLogin}>
-              Sign in with Google
-            </Button>
-            <Button width="75" disabled>
-              Sign in with Facebook
-            </Button>
-          </div>
-        )}
-        {user && !loading && (
-          <Button width="75" onClick={signOut}>
-            Sign out
-          </Button>
-        )}
-      </div>
+      <QueryClientProvider client={queryClient}></QueryClientProvider>
+      <RouterProvider router={router} />
     </>
   );
 }
